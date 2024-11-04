@@ -60,7 +60,7 @@ public class Main {
                     String carType = scanner.nextLine();
 
                     // Create an OfferRide object for the driver
-                    OfferRide offerRide = new OfferRide(preferredDateTime, availableSeats, price);
+                    OfferRide offerRide = new OfferRide(preferredDateTime, availableSeats, price, carType);
 
                     // Log the offered ride details
                     System.out.println("Ride offered: " + offerRide + ", Type of car: " + carType);
