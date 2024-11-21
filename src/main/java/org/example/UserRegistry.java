@@ -8,6 +8,7 @@ public class UserRegistry {
     private static UserRegistry instance;
     private Map<String, User> users;
 
+    //constructor
     private UserRegistry() {
         users = new HashMap<>();
     }

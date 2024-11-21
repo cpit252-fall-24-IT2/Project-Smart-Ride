@@ -5,8 +5,10 @@ public class User {
 
     private double balance;
 
+    //constructor
     public User(String username, String phone_number, String email) {
         this.username = username;
+
         this.balance = 0.0;
     }
 

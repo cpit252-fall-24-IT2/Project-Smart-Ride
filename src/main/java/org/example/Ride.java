@@ -10,6 +10,7 @@ public class Ride {
     private Date dateTime;
     private boolean completed;
 
+    //constructor
     public Ride(User passenger) {
         this.passenger = passenger;
     }

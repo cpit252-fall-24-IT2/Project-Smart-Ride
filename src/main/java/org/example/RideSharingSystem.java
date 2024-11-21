@@ -4,6 +4,7 @@ public class RideSharingSystem {
     private static RideSharingSystem instance;
     private UserRegistry userRegistry;
 
+    //constructor
     private RideSharingSystem() {
         userRegistry = UserRegistry.getInstance();
     }
