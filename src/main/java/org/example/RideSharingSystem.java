@@ -8,7 +8,7 @@ public class RideSharingSystem {
         userRegistry = UserRegistry.getInstance();
     }
 
-    public static RideSharingSystem getInstance() {
+    public static synchronized RideSharingSystem getInstance() {
         if (instance == null) {
             instance = new RideSharingSystem();
         }
@@ -18,8 +18,21 @@ public class RideSharingSystem {
     public void registerUser(User user) {
         userRegistry.registerUser(user);
     }
-
-    public User findUserByUsername(String username) {
-        return userRegistry.findUserByUsername(username);
+     public User findUserByUsername(String username){
+        return  userRegistry.findUserByUsername(username);
     }
-}
+
+    //check if thers is atleast 1 passenger and create a ride
+    public  Ride createRide(User passenger) {
+        try {
+            if (passenger == null) {
+                throw new IllegalArgumentException("Passenger cannot be null.");
+            }
+            return new Ride(passenger);
+        } catch (Exception e){
+            System.out.println("Failed to create ride" + e.getMessage());
+            return null;
+    }
+        }
+    }
+

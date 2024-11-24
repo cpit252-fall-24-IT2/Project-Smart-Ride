@@ -9,13 +9,16 @@ public class Main {
         RideSharingSystem system = RideSharingSystem.getInstance();
 
         // Register a new user
-        System.out.print("Enter your details to register: username, phone number, and email: ");
-        String username = scanner.nextLine();
+        System.out.println("Enter your details to register:");
+        System.out.println("Enter a username");
+        String username =  scanner.nextLine();
+        System.out.println("Enter a phone number");
         String phone_number = scanner.nextLine();
+        System.out.println("Enter an email");
         String email = scanner.nextLine();
         User user = new User(username, phone_number, email);
         system.registerUser(user);
-
+        System.out.println("your account with the following details is created succesfully " + user );
         boolean exit = false;
 
         while (!exit) {
