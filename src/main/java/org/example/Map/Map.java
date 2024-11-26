@@ -1,4 +1,4 @@
-package org.example;
+package org.example.Map;
 
 import javax.swing.JFrame;
 
