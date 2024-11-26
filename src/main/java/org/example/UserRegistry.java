@@ -9,7 +9,6 @@ public class UserRegistry {
     private static UserRegistry instance;
     private Map<String, User> users = new HashMap<>();
 
-
     //singleton using synch block 4 thread safety
     public static synchronized UserRegistry getInstance() {
         if (instance == null) {
