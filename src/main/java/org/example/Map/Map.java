@@ -1,7 +1,6 @@
 package org.example.Map;
 
 import javax.swing.JFrame;
-
 import org.jxmapviewer.JXMapViewer;
 import org.jxmapviewer.OSMTileFactoryInfo;
 import org.jxmapviewer.viewer.DefaultTileFactory;
