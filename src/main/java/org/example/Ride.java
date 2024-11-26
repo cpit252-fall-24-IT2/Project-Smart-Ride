@@ -11,9 +11,13 @@ public class Ride {
     private boolean completed;
 
     //constructor
-    public Ride(User passenger) {
+    public Ride(User passenger, String dropoffLocation){
         this.passenger = passenger;
     }
+
+    public Ride(User passenger) {
+    }
+
 
     public void setPassenger(User passenger) {
         this.passenger = passenger;
