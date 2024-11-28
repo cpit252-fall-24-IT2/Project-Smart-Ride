@@ -1,8 +1,14 @@
 package org.example.Map;
 
 import javax.swing.JFrame;
+import javax.swing.event.MouseInputListener;
+
 import org.jxmapviewer.JXMapViewer;
 import org.jxmapviewer.OSMTileFactoryInfo;
+import org.jxmapviewer.input.CenterMapListener;
+import org.jxmapviewer.input.PanKeyListener;
+import org.jxmapviewer.input.PanMouseInputListener;
+import org.jxmapviewer.input.ZoomMouseWheelListenerCursor;
 import org.jxmapviewer.viewer.DefaultTileFactory;
 import org.jxmapviewer.viewer.GeoPosition;
 import org.jxmapviewer.viewer.TileFactoryInfo;
@@ -24,6 +30,23 @@ public class Map {
 
         mapViewer.setZoom(9);
         mapViewer.setAddressLocation(frankfurt);
+
+        // Set the focus
+        mapViewer.setZoom(7);
+        mapViewer.setAddressLocation(frankfurt);
+
+        // Add interactions
+        MouseInputListener mia = new PanMouseInputListener(mapViewer);
+        mapViewer.addMouseListener(mia);
+        mapViewer.addMouseMotionListener(mia);
+        mapViewer.addMouseListener(new CenterMapListener(mapViewer));
+        mapViewer.addMouseWheelListener(new ZoomMouseWheelListenerCursor(mapViewer));
+        mapViewer.addKeyListener(new PanKeyListener(mapViewer));
+
+        // Add a selection
+        SelectionAdapter sa = new SelectionAdapter(mapViewer);
+        mapViewer.addMouseListener(sa);
+        mapViewer.addMouseMotionListener(sa);
 
         // Display the viewer in a JFrame
         JFrame frame = new JFrame("Map");
