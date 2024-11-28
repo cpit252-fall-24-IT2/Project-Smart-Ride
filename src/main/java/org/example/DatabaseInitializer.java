@@ -1,3 +1,4 @@
+package org.example;
 import java.sql.Connection;
 import java.sql.Statement;
 
@@ -7,13 +8,13 @@ public class DatabaseInitializer {
             Statement statement =connection.createStatement()) {
 
             //Schema creation
-               //users
+            //users
             String createUsersTable =
-               "CREATE TABLE IF NOT EXISTS Users (\n" +
-               " username PRIMARY KEY  NOT NULL, \n" +
-               " email TEXT UNIQUE NOT NULL,\n" +
-               " phone number TEXT,\n" + ");";
-                //Ride table
+                    "CREATE TABLE IF NOT EXISTS Users (\n" +
+                            " username PRIMARY KEY  NOT NULL, \n" +
+                            " email TEXT UNIQUE NOT NULL,\n" +
+                            " phone number TEXT,\n" + ");";
+            //Ride table
             String createRidesTable =
                     "CREATE TABLE IF NOT EXISTS Rides (\n" +
                             "    ride_id TEXT PRIMARY KEY,\n" +
@@ -26,7 +27,7 @@ public class DatabaseInitializer {
                             "    FOREIGN KEY(driver_id) REFERENCES Users(id)" +
                             ");";
 
-                       // riderequest
+            // riderequest
             String createRideRequestsTable =
                     "CREATE TABLE IF NOT EXISTS RideRequests (\n" +
                             "    request_id TEXT PRIMARY KEY,\n" +
@@ -37,7 +38,7 @@ public class DatabaseInitializer {
                             "    status TEXT CHECK(status IN ('PENDING', 'ACCEPTED', 'REJECTED')) DEFAULT 'PENDING',\n" +
                             "    FOREIGN KEY(rider_id) REFERENCES Users(id)\n" +
                             ");";
-             //  id
+            //  id
             statement.executeUpdate(createUsersTable);
             statement.executeUpdate(createRidesTable);
             statement.executeUpdate(createRideRequestsTable);
@@ -45,6 +46,6 @@ public class DatabaseInitializer {
         } catch (Exception e) {
             e.getMessage();
 
-    }
+        }
     }
 }

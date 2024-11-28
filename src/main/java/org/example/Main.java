@@ -1,12 +1,18 @@
 package org.example;
 
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Scanner;
-
+import org.example.DatabaseConnection;
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         Scanner scanner = new Scanner(System.in);
+        DatabaseInitializer.initialize();
+        System.out.println("Database Initialised");
+        RideSharingFacade rideSharingFacade = new RideSharingFacade();
         RideSharingSystem system = RideSharingSystem.getInstance();
+        RideSharingFacade facade = new RideSharingFacade();
 
         // Register a new user
         System.out.println("Enter your details to register:");
@@ -18,9 +24,9 @@ public class Main {
         String email = scanner.nextLine();
         User user = new User(username, phone_number, email);
         system.registerUser(user);
-        System.out.println("your account with the following details is created succesfully " + user );
-        boolean exit = false;
+        System.out.println("your account with the following details is created successfully " + user );
 
+        boolean exit = false;
         while (!exit) {
             System.out.println("\nWhat would you like to do?");
             System.out.println("1. Request a Ride");
@@ -28,7 +34,7 @@ public class Main {
             System.out.println("3. Quit");
             System.out.print("Enter your choice (1-3): ");
             int choice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
+            scanner.nextLine();
 
             switch (choice) {
                 case 1:
@@ -40,7 +46,7 @@ public class Main {
                     String requestDropOffLocation = scanner.nextLine();
                     System.out.print("Enter number of seats needed: ");
                     int requestedSeats = scanner.nextInt();
-                    scanner.nextLine(); // Consume newline
+                    scanner.nextLine();
                     System.out.print("Enter preferred time: ");
                     String requestPreferredDateTime = scanner.nextLine();
 
@@ -58,7 +64,7 @@ public class Main {
                     int availableSeats = scanner.nextInt();
                     System.out.print("Enter price per seat: ");
                     double price = scanner.nextDouble();
-                    scanner.nextLine(); // Consume newline
+                    scanner.nextLine();
                     System.out.print("Enter type of car: ");
                     String carType = scanner.nextLine();
 
