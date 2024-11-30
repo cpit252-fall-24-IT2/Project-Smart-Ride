@@ -1,3 +1,4 @@
+/*
 package org.example;
 
 public class RideSharingSystem {
@@ -15,9 +16,9 @@ public class RideSharingSystem {
         return instance;
     }
 
-    public void registerUser(User user) {
-        userRegistry.registerUser(user);
-    }
+  //  public void registerUser(User user) {
+    //    userRegistry.registerUser(user);
+    //}
      public User findUserByUsername(String username){
         return  userRegistry.findUserByUsername(username);
     }
@@ -35,4 +36,4 @@ public class RideSharingSystem {
     }
         }
     }
-
+*/

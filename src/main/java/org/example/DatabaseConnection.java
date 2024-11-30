@@ -1,3 +1,4 @@
+/*
 package org.example;
 
 import java.sql.Connection;
@@ -25,14 +26,7 @@ public class DatabaseConnection {
         }
         return connection;
     }
-     /*
 
-        try {
-            return DriverManager.getConnection(DB_URL);
-        } catch (SQLException e){
-            throw new RuntimeException("Connection to the Database failed", e);
-        }
-    }
-
-      */
 }
+
+*/
