@@ -4,7 +4,6 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
-
 import org.jxmapviewer.JXMapViewer;
 import org.jxmapviewer.viewer.GeoPosition;
 
@@ -48,15 +47,9 @@ public class SelectionAdapter extends MouseAdapter {
         if (e.getButton() != MouseEvent.BUTTON3)
             return;
 
-        // Convert the pixel coordinates to GeoPosition (map coordinates)
-        Point2D clickPoint = e.getPoint();
-        GeoPosition geoPos = viewer.convertPointToGeoPosition(clickPoint);
-
-        // Create a new waypoint at the clicked location
-        MyWaypoint waypoint = new MyWaypoint("Waypoint", Color.RED, geoPos);
-
-        this.waypoint=waypoint;
-
+        // Convert the pixel coordinates to GeoPosition for the WayPoint
+        GeoPosition geoPos = viewer.convertPointToGeoPosition(e.getPoint());
+        waypoint = new MyWaypoint("Waypoint", Color.RED, geoPos);
 
         dragging = false;
         viewer.repaint();

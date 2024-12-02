@@ -1,6 +1,10 @@
 package org.example;
 
 
+import org.example.Map.Map;
+import org.example.Map.MyWaypoint;
+
+import javax.swing.*;
 import java.util.Scanner;
 
 public class Main {
@@ -34,10 +38,21 @@ public class Main {
                 case 1:
                     // Request a ride
                     System.out.println("Request a Ride:");
-                    System.out.print("Enter pickup location: ");
-                    String requestPickupLocation = scanner.nextLine();
-                    System.out.print("Enter drop-off location: ");
-                    String requestDropOffLocation = scanner.nextLine();
+
+                    Map map = new Map();
+                    map.createMapViewer();
+                    map.configureMapViewer();
+                    map.addInteractions();
+
+                    JFrame frem =map.setupWindow("Enter pickup location: ");
+                    MyWaypoint requestPickupLocation=map.runWaypointCatcher();
+                    System.out.println(requestPickupLocation);
+                    frem.setDefaultCloseOperation(1);//to close the fram
+
+                    frem =map.setupWindow("Enter drop-off location: ");
+                    MyWaypoint requestDropOffLocation =map.runWaypointCatcher();
+                    frem.setDefaultCloseOperation(1);//to close the fram
+
                     System.out.print("Enter number of seats needed: ");
                     int requestedSeats = scanner.nextInt();
                     scanner.nextLine(); // Consume newline

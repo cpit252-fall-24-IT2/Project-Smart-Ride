@@ -24,9 +24,7 @@ public class MyWaypoint extends DefaultWaypoint {
 
     @Override
     public String toString() {
-        return "MyWaypoint{" +
-                "label='" + label + '\'' +
-                ", color=" + color + "Position"+ super.getPosition()+
-                '}';
+        return "MyWaypoint{" + "label='" + label + '\'' +
+                ", color=" + color + "Position"+ super.getPosition()+ '}';
     }
 }

@@ -2,7 +2,6 @@ package org.example.Map;
 
 import javax.swing.JFrame;
 import javax.swing.event.MouseInputListener;
-
 import org.jxmapviewer.JXMapViewer;
 import org.jxmapviewer.OSMTileFactoryInfo;
 import org.jxmapviewer.input.CenterMapListener;
@@ -12,8 +11,6 @@ import org.jxmapviewer.input.ZoomMouseWheelListenerCursor;
 import org.jxmapviewer.viewer.DefaultTileFactory;
 import org.jxmapviewer.viewer.GeoPosition;
 import org.jxmapviewer.viewer.TileFactoryInfo;
-
-import java.awt.event.MouseEvent;
 
 public class Map {
 
@@ -31,9 +28,8 @@ public class Map {
 
     // Configures the map viewer
     public void configureMapViewer() {
-        GeoPosition frankfurt = new GeoPosition(21.5, 39.2);
         mapViewer.setZoom(7);  // Set zoom level
-        mapViewer.setAddressLocation(frankfurt);  // Set focus to Frankfurt
+        mapViewer.setAddressLocation(new GeoPosition(21.5, 39.2));  // Set focus to  Jeddah
     }
 
     // Adds mouse and key listeners to the map
@@ -52,12 +48,13 @@ public class Map {
     }
 
     // Creates the JFrame window and adds the map viewer
-    public void setupWindow(String FrameTitle) {
+    public JFrame setupWindow(String FrameTitle) {
         JFrame frame = new JFrame(FrameTitle);
         frame.getContentPane().add(mapViewer);
         frame.setSize(800, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
+        return frame;
     }
 
     // Catches the waypoint
@@ -65,6 +62,7 @@ public class Map {
         while (true) {
             MyWaypoint waypoint = selectionAdapter.getWaypoint();
             if (waypoint != null) {
+                System.out.println(waypoint);
                 return waypoint;
             }
         }
