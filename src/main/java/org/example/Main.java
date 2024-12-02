@@ -3,7 +3,6 @@ package org.example;
 
 import org.example.Map.Map;
 import org.example.Map.MyWaypoint;
-
 import javax.swing.*;
 import java.util.Scanner;
 
@@ -22,9 +21,9 @@ public class Main {
         String email = scanner.nextLine();
         User user = new User(username, phone_number, email);
         system.registerUser(user);
-        System.out.println("your account with the following details is created succesfully " + user );
-        boolean exit = false;
+        System.out.println("Your account with the following details is created successfully: " + user);
 
+        boolean exit = false;
         while (!exit) {
             System.out.println("\nWhat would you like to do?");
             System.out.println("1. Request a Ride");
@@ -38,31 +37,27 @@ public class Main {
                 case 1:
                     // Request a ride
                     System.out.println("Request a Ride:");
+                        Map map = new Map();
+                        map.createMapViewer();
 
-                    Map map = new Map();
-                    map.createMapViewer();
-                    map.configureMapViewer();
-                    map.addInteractions();
+                        JFrame frem = map.setupWindow("Enter pickup location: ");
+                        MyWaypoint requestPickupLocation = map.runWaypointCatcher();
+                        System.out.println(requestPickupLocation);
+                        frem.dispose(); // Close the frame
 
-                    JFrame frem =map.setupWindow("Enter pickup location: ");
-                    MyWaypoint requestPickupLocation=map.runWaypointCatcher();
-                    System.out.println(requestPickupLocation);
-                    frem.dispose();//to close the fram
+                        frem = map.setupWindow("Enter drop-off location: ");
+                        MyWaypoint requestDropOffLocation = map.runWaypointCatcher();
+                        frem.dispose(); // Close the frame
 
-                    frem =map.setupWindow("Enter drop-off location: ");
-                    MyWaypoint requestDropOffLocation =map.runWaypointCatcher();
-                    frem.dispose();//to close the fram
+                        System.out.print("Enter number of seats needed: ");
+                        int requestedSeats = scanner.nextInt();
+                        scanner.nextLine(); // Consume newline
+                        System.out.print("Enter preferred time: ");
+                        String requestPreferredDateTime = scanner.nextLine();
 
-                    System.out.print("Enter number of seats needed: ");
-                    int requestedSeats = scanner.nextInt();
-                    scanner.nextLine(); // Consume newline
-                    System.out.print("Enter preferred time: ");
-                    String requestPreferredDateTime = scanner.nextLine();
-
-                    // Log the ride request details
-                    System.out.println("Ride requested from " + requestPickupLocation + " to " + requestDropOffLocation +
-                          " for " + requestedSeats + " seat(s) on " + requestPreferredDateTime);
-                    break;
+                        // Log the ride request details
+                        System.out.println("Ride requested from " + requestPickupLocation + " to " + requestDropOffLocation +
+                                " for " + requestedSeats + " seat(s) on " + requestPreferredDateTime);
 
                 case 2:
                     // Offer a ride
@@ -98,4 +93,5 @@ public class Main {
         scanner.close();
     }
 }
+
 

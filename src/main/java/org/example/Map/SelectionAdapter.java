@@ -12,7 +12,7 @@ public class SelectionAdapter extends MouseAdapter {
     private JXMapViewer viewer;
     private Point2D startPos = new Point2D.Double();
     private Point2D endPos = new Point2D.Double();
-    private MyWaypoint waypoint=null;
+    private MyWaypoint waypoint = null;
 
     public SelectionAdapter(JXMapViewer viewer) {
         this.viewer = viewer;
@@ -20,7 +20,7 @@ public class SelectionAdapter extends MouseAdapter {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        if (e.getButton() != MouseEvent.BUTTON3)
+        if (e.getButton() != MouseEvent.BUTTON3) // Check if the right mouse button is pressed
             return;
 
         startPos.setLocation(e.getX(), e.getY());
@@ -44,7 +44,7 @@ public class SelectionAdapter extends MouseAdapter {
         if (!dragging)
             return;
 
-        if (e.getButton() != MouseEvent.BUTTON3)
+        if (e.getButton() != MouseEvent.BUTTON3) // Right mouse button must be released
             return;
 
         // Convert the pixel coordinates to GeoPosition for the WayPoint
@@ -52,24 +52,28 @@ public class SelectionAdapter extends MouseAdapter {
         waypoint = new MyWaypoint("Waypoint", Color.RED, geoPos);
 
         dragging = false;
+
+        // Repaint after finishing the dragging
         viewer.repaint();
     }
 
+    // Get the waypoint created by the user on mouse release
     public MyWaypoint getWaypoint() {
         MyWaypoint tempWaypoint = waypoint;
-        waypoint = null;
+        waypoint = null; // Reset the waypoint after returning it
         return tempWaypoint;
     }
 
-    public Rectangle getRectangle() {
+    public void paint(Graphics g) {
         if (dragging) {
-            int x1 = (int) Math.min(startPos.getX(), endPos.getX());
-            int y1 = (int) Math.min(startPos.getY(), endPos.getY());
-            int x2 = (int) Math.max(startPos.getX(), endPos.getX());
-            int y2 = (int) Math.max(startPos.getY(), endPos.getY());
 
-            return new Rectangle(x1, y1, x2-x1, y2-y1);
+            g.setColor(Color.RED);
+            int x = (int) Math.min(startPos.getX(), endPos.getX());
+            int y = (int) Math.min(startPos.getY(), endPos.getY());
+            int width = (int) Math.abs(startPos.getX() - endPos.getX());
+            int height = (int) Math.abs(startPos.getY() - endPos.getY());
+
+            g.drawRect(x, y, width, height);  // Example of a rectangle for visual feedback
         }
-        return null;
     }
 }
