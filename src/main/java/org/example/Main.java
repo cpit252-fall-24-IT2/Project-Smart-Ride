@@ -39,6 +39,8 @@ public class Main {
                     System.out.println("Request a Ride:");
                         Map map = new Map();
                         map.createMapViewer();
+                        map.configureMapViewer();
+                        map.addInteractions();
 
                         JFrame frem = map.setupWindow("Enter pickup location: ");
                         MyWaypoint requestPickupLocation = map.runWaypointCatcher();
