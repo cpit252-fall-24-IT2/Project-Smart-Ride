@@ -1,2 +1,2 @@
 # Project-Smart-Ride
-Ride sharing abb
+Ride sharing app
