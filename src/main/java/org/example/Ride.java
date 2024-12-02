@@ -1,16 +1,19 @@
 package org.example;
 
+import org.example.Map.MyWaypoint;
+
 import java.util.Date;
 
 public class Ride {
     private User passenger;
     private User driver;
-    private String pickupLocation;
-    private String dropoffLocation;
+    private MyWaypoint pickupLocation;
+    private MyWaypoint dropoffLocation;
     private Date dateTime;
     private boolean completed;
 
-    public Ride(User passenger, String dropoffLocation){
+    //constructor
+    public Ride(User passenger, MyWaypoint dropoffLocation){
         this.passenger = passenger;
     }
 
@@ -34,19 +37,19 @@ public class Ride {
         return driver;
     }
 
-    public void setPickupLocation(String location) {
+    public void setPickupLocation(MyWaypoint location) {
         this.pickupLocation = location;
     }
 
-    public String getPickupLocation() {
+    public MyWaypoint getPickupLocation() {
         return pickupLocation;
     }
 
-    public void setDropoffLocation(String location) {
+    public void setDropoffLocation(MyWaypoint location) {
         this.dropoffLocation = location;
     }
 
-    public String getDropoffLocation() {
+    public MyWaypoint getDropoffLocation() {
         return dropoffLocation;
     }
 

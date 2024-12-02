@@ -11,6 +11,8 @@ public class User implements Serializable {
     private double balance;
 
 
+
+    //constructor
     public User(String username, String phone_number, String email, String password) {
         this.username = username;
         this.phone_number = phone_number;

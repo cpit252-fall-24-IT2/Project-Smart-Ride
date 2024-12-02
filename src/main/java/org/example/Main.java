@@ -1,11 +1,18 @@
 package org.example;
+
 import java.util.Scanner;
+import org.example.Map.Map;
+import org.example.Map.MyWaypoint;
+import javax.swing.*;
+import java.util.Scanner;
+
 public class Main {
 public static void main(String[] args){
     Scanner scanner = new Scanner(System.in);
     UserRegistry registry = UserRegistry.getInstance();
 
     System.out.println("\n Welcome to Ride Sharing APP\n What would you like to do?");
+
 
     boolean exit = false;
     while (!exit) {
@@ -35,7 +42,6 @@ public static void main(String[] args){
                 User user = new User(username, phone_number, email, password);
                 registry.registerUser(user);
                 break;
-
             }
             //dispaly users
                   case 2: {
@@ -53,24 +59,34 @@ public static void main(String[] args){
                     System.out.println("User not found.");
                 }
                 break;
-
             }
+            
             case 4: {
                 // Request a ride
-                System.out.println("Request a Ride:");
-                System.out.print("Enter pickup location: ");
-                String requestPickupLocation = scanner.nextLine();
-                System.out.print("Enter drop-off location: ");
-                String requestDropOffLocation = scanner.nextLine();
-                System.out.print("Enter number of seats needed: ");
-                int requestedSeats = scanner.nextInt();
-                scanner.nextLine();
-                System.out.print("Enter preferred time: ");
-                String requestPreferredDateTime = scanner.nextLine();
+                    System.out.println("Request a Ride:");
+                        Map map = new Map();
+                        map.createMapViewer();
+                        map.configureMapViewer();
+                        map.addInteractions();
 
-                // Log the ride request details
-                System.out.println("Ride requested from " + requestPickupLocation + " to " + requestDropOffLocation +
-                        " for " + requestedSeats + " seat(s) on " + requestPreferredDateTime);
+                        JFrame frem = map.setupWindow("Enter pickup location: ");
+                        MyWaypoint requestPickupLocation = map.runWaypointCatcher();
+                        System.out.println(requestPickupLocation);
+                        frem.dispose(); // Close the frame
+
+                        frem = map.setupWindow("Enter drop-off location: ");
+                        MyWaypoint requestDropOffLocation = map.runWaypointCatcher();
+                        frem.dispose(); // Close the frame
+
+                        System.out.print("Enter number of seats needed: ");
+                        int requestedSeats = scanner.nextInt();
+                        scanner.nextLine(); // Consume newline
+                        System.out.print("Enter preferred time: ");
+                        String requestPreferredDateTime = scanner.nextLine();
+
+                        // Log the ride request details
+                        System.out.println("Ride requested from " + requestPickupLocation + " to " + requestDropOffLocation +
+                                " for " + requestedSeats + " seat(s) on " + requestPreferredDateTime);
                 break;
             }
 
@@ -108,4 +124,5 @@ public static void main(String[] args){
         scanner.close();
     }
 }
+
 

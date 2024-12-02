@@ -17,7 +17,8 @@ public class UserRegistry {
         }
     }
 
-    public static synchronized UserRegistry getInstance(){
+    //singleton using synch block 4 thread safety
+    public static synchronized UserRegistry getInstance() {
         if (instance == null) {
             instance = new UserRegistry();
         }
