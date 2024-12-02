@@ -63,7 +63,9 @@ public class SelectionAdapter extends MouseAdapter {
     }
 
     public MyWaypoint getWaypoint() {
-        return waypoint;
+        MyWaypoint tempWaypoint = waypoint;
+        waypoint = null;
+        return tempWaypoint;
     }
 
     public Rectangle getRectangle() {
