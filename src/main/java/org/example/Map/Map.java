@@ -13,6 +13,8 @@ import org.jxmapviewer.viewer.DefaultTileFactory;
 import org.jxmapviewer.viewer.GeoPosition;
 import org.jxmapviewer.viewer.TileFactoryInfo;
 
+import java.awt.event.MouseEvent;
+
 public class Map {
     public static void main(String[] args) {
         JXMapViewer mapViewer = new JXMapViewer();
@@ -54,5 +56,14 @@ public class Map {
         frame.setSize(800, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
+
+        //Waypoint Catcher
+        while (true){
+            MyWaypoint w=sa.getWaypoint();
+            if (w!=null){
+                System.out.println(w);
+                break;
+            }
+        }
     }
 }

@@ -22,4 +22,11 @@ public class MyWaypoint extends DefaultWaypoint {
         return color;
     }
 
+    @Override
+    public String toString() {
+        return "MyWaypoint{" +
+                "label='" + label + '\'' +
+                ", color=" + color +
+                '}';
+    }
 }
