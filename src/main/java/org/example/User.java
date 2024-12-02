@@ -1,17 +1,23 @@
 package org.example;
 
-public class User {
+
+import java.io.Serializable;
+
+public class User implements Serializable {
     private String username;
     private String phone_number;
     private String email;
+    private String password ;
     private double balance;
 
 
+
     //constructor
-    public User(String username, String phone_number, String email) {
+    public User(String username, String phone_number, String email, String password) {
         this.username = username;
         this.phone_number = phone_number;
         this.email = email;
+        this.password = password;
         this.balance = 0.0;
     }
 
@@ -41,23 +47,24 @@ public class User {
         this.email = email;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public double getBalance() {
         return balance;
     }
 
     public void setBalance(double balance) {
+
         this.balance = balance;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "username='" + username + '\'' +
-                ", phone_number='" + phone_number + '\'' +
-                ", email='" + email + '\'' +
-                ", balance=" + balance +
-                '}';
-    }
+
 }
 
 

@@ -1,5 +1,52 @@
 package org.example;
 
+
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class RideSharingFacade {
+
+    private UserDAO userDAO ;
+    private  RideDAO rideDAO;
+
+    public RideSharingFacade() throws SQLException {
+        this.registerUser();
+    }
+
+    private void registerUser() {
+    }
+
+    public RideSharingFacade(Connection connection) throws SQLException {
+        this.userDAO = new UserDAO(connection);
+        this.rideDAO = new RideDAO(connection);
+    }
+
+    public void registerUser(String username, String email , String phone) throws SQLException {
+        userDAO.addUser(username, email, phone);
+    }
+
+    public void postRide(String rideId, String driverId, String origin, String destination, String departureTime, int seatsAvailable) throws SQLException {
+        rideDAO.addRide(rideId, driverId, origin, destination, departureTime, seatsAvailable);
+    }
+
+    public void listAllUsers(){
+        try (ResultSet resultSet = userDAO.getAllUsers()){
+            while (resultSet.next()) {
+                System.out.println("Username: " + resultSet.getString("username" + ", Email:" + resultSet.getString("email" + "Phone Number" + resultSet.getString("phone"))));
+            }
+        }catch (Exception exception){
+            exception.getMessage();
+        }
+    }
+}
+
+
+/*
+
+######################################################firstRIde###########################################
+//<<<<<<< Updated upstream
 public class RideSharingFacade {
     private RideSharingSystem rideSharingSystem;
     private UserRegistry userRegistry;
@@ -43,3 +90,4 @@ public class RideSharingFacade {
 
     }
 
+*/
