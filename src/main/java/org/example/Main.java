@@ -47,11 +47,11 @@ public class Main {
                     JFrame frem =map.setupWindow("Enter pickup location: ");
                     MyWaypoint requestPickupLocation=map.runWaypointCatcher();
                     System.out.println(requestPickupLocation);
-                    frem.setDefaultCloseOperation(1);//to close the fram
+                    frem.dispose();//to close the fram
 
                     frem =map.setupWindow("Enter drop-off location: ");
                     MyWaypoint requestDropOffLocation =map.runWaypointCatcher();
-                    frem.setDefaultCloseOperation(1);//to close the fram
+                    frem.dispose();//to close the fram
 
                     System.out.print("Enter number of seats needed: ");
                     int requestedSeats = scanner.nextInt();
@@ -61,7 +61,7 @@ public class Main {
 
                     // Log the ride request details
                     System.out.println("Ride requested from " + requestPickupLocation + " to " + requestDropOffLocation +
-                            " for " + requestedSeats + " seat(s) on " + requestPreferredDateTime);
+                          " for " + requestedSeats + " seat(s) on " + requestPreferredDateTime);
                     break;
 
                 case 2:
