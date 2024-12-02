@@ -1,10 +1,10 @@
 package org.example;
 
-/*
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
+
 public class UserDAO {
      private Connection connection;
 
@@ -36,5 +36,3 @@ public class UserDAO {
 return null;
 }
 }
-
-*/

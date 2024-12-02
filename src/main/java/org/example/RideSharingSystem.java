@@ -1,4 +1,3 @@
-/*
 package org.example;
 
 public class RideSharingSystem {
@@ -25,7 +24,7 @@ public class RideSharingSystem {
     }
 
     //check if thers is atleast 1 passenger and create a ride
-    public  Ride createRide(User passenger) {
+    public Ride createRide(User passenger) {
         try {
             if (passenger == null) {
                 throw new IllegalArgumentException("Passenger cannot be null.");
@@ -37,4 +36,4 @@ public class RideSharingSystem {
     }
         }
     }
-*/
+
