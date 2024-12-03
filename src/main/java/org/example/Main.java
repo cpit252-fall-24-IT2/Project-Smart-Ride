@@ -62,18 +62,17 @@ public static void main(String[] args){
             case 4: {
                 // Request a ride
                     System.out.println("Request a Ride:");
-                        Map map = new Map();
-                        map.createMapViewer();
-                        map.configureMapViewer();
-                        map.addInteractions();
+                        Map map = new Map("Enter Pick-up Location: ");
 
-                        JFrame frem = map.setupWindow("Enter pickup location: ");
-                        MyWaypoint requestPickupLocation = map.runWaypointCatcher();
+                        JFrame frem = map.getFrame();
+                        MyWaypoint requestPickupLocation = map.getWaypoint();
                         System.out.println(requestPickupLocation);
                         frem.dispose(); // Close the frame
 
-                        frem = map.setupWindow("Enter drop-off location: ");
-                        MyWaypoint requestDropOffLocation = map.runWaypointCatcher();
+                        map = new Map("Enter drop-off location: ");
+
+                        frem = map.getFrame();
+                        MyWaypoint requestDropOffLocation = map.getWaypoint();
                         frem.dispose(); // Close the frame
 
                         System.out.print("Enter number of seats needed: ");
