@@ -4,7 +4,6 @@ import java.util.Scanner;
 import org.example.Map.Map;
 import org.example.Map.MyWaypoint;
 import javax.swing.*;
-import java.util.Scanner;
 
 public class Main {
 public static void main(String[] args){
@@ -13,13 +12,12 @@ public static void main(String[] args){
 
     System.out.println("\n Welcome to Ride Sharing APP\n What would you like to do?");
 
-
     boolean exit = false;
     while (!exit) {
         System.out.println("\n1. Register/LogIN ");
-        System.out.println("2.  Display All Users");
-        System.out.println("3.  Search User by Username");
-        System.out.println("4.  Request a Ride");
+        System.out.println("2. Display All Users");
+        System.out.println("3. Search User by Username");
+        System.out.println("4. Request a Ride");
         System.out.println("5. Offer a Ride");
         System.out.println("6. Display all users");
         System.out.println("7. Quit");

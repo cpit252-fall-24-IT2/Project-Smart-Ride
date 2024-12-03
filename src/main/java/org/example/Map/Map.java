@@ -1,7 +1,5 @@
 package org.example.Map;
 
-import javax.swing.JFrame;
-import javax.swing.event.MouseInputListener;
 import org.jxmapviewer.JXMapViewer;
 import org.jxmapviewer.OSMTileFactoryInfo;
 import org.jxmapviewer.input.CenterMapListener;
@@ -11,6 +9,9 @@ import org.jxmapviewer.input.ZoomMouseWheelListenerCursor;
 import org.jxmapviewer.viewer.DefaultTileFactory;
 import org.jxmapviewer.viewer.GeoPosition;
 import org.jxmapviewer.viewer.TileFactoryInfo;
+
+import javax.swing.*;
+import javax.swing.event.MouseInputListener;
 
 public class Map {
 
