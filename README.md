@@ -7,3 +7,6 @@ Features:-
 3) Ride Request
 4) Storing Users and Information in text files.
 
+API used
+we used jxmapviewer2 for the map in the app
+we used twilio for the SMS handling 
