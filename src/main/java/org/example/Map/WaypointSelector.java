@@ -12,11 +12,10 @@ import org.jxmapviewer.viewer.DefaultTileFactory;
 import org.jxmapviewer.viewer.GeoPosition;
 import org.jxmapviewer.viewer.TileFactoryInfo;
 
-public class Map {
+public class WaypointSelector {
     MyWaypoint waypoint;
-    JFrame frame;
 
-    public Map(String title) {
+    public WaypointSelector(String title) {
        createMapViewer(title);
     }
 
@@ -50,7 +49,7 @@ public class Map {
         mapViewer.addMouseMotionListener(selectionAdapter);
 
         // Display the viewer in a JFrame
-        frame = new JFrame(title);
+        JFrame frame = new JFrame(title);
         frame.getContentPane().add(mapViewer);
         frame.setSize(800, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -64,14 +63,13 @@ public class Map {
                 break;
             }
         }
+        frame.dispose();
     }
 
-    public MyWaypoint getWaypoint() {
+    public MyWaypoint getWaypoint(String Label) {
+        waypoint.setLabel(Label);
         return waypoint;
     }
 
-    public JFrame getFrame() {
-        return frame;
-    }
 }
 
