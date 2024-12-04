@@ -11,7 +11,7 @@ public class Main {
 public static void main(String[] args) throws IOException {
     Scanner scanner = new Scanner(System.in);
     UserRegistry registry = UserRegistry.getInstance();
-
+    RideManager  rideManager = RideManager.getInstance();
     System.out.println("\n Welcome to Ride Sharing APP\n What would you like to do?");
 
     boolean exit = false;
@@ -21,7 +21,7 @@ public static void main(String[] args) throws IOException {
         System.out.println("3. Search User by Username");
         System.out.println("4. Request a Ride");
         System.out.println("5. Offer a Ride");
-        System.out.println("6. Display all users");
+        System.out.println("6. Display available Rides");
         System.out.println("7. Quit");
         System.out.print("Enter your choice (1-7): ");
 
@@ -87,20 +87,27 @@ public static void main(String[] args) throws IOException {
 
                 case 5:
                     // Offer a ride
-                    System.out.println("Offer a Ride:");
-                    System.out.print("Enter preferred time: ");
-                    String preferredDateTime = scanner.nextLine();
-                    System.out.print("Enter available seats: ");
-                    int availableSeats = scanner.nextInt();
-                    System.out.print("Enter price per seat: ");
-                    double price = scanner.nextDouble();
-                    scanner.nextLine();
-                    System.out.print("Enter type of car: ");
-                    String carType = scanner.nextLine();
+                   try {
+                       System.out.println("Offer a Ride:");
+                       System.out.println("Enter your Username");
+                       String offererUsername = scanner.nextLine();
+                       System.out.print("Enter preferred time: ");
+                       String preferredDateTime = scanner.nextLine();
+                       System.out.print("Enter available seats: ");
+                       int availableSeats = scanner.nextInt();
+                       System.out.print("Enter price per seat: ");
+                       double price = scanner.nextDouble();
+                       scanner.nextLine();
+                       System.out.print("Enter type of car: ");
+                       String carType = scanner.nextLine();
 
-                    // Create an OfferRide object for the driver
-                    OfferRide offerRide = new OfferRide(preferredDateTime, availableSeats, price, carType);
-                    System.out.println("Ride offered: " + offerRide + ", Type of car: " + carType);
+                       // Create an OfferRide object for the driver
+                       OfferRide offerRide = new OfferRide(preferredDateTime, availableSeats, price, carType);
+                       rideManager.offerRide(offererUsername, offerRide);
+                       System.out.println("Ride offered successfully " + offerRide);
+                   } catch (Exception e) {
+                       System.out.println("Error offering Ride: " + e.getMessage());
+                   }
                     break;
             case 6:{
                 System.out.println("\nAvailable Rides: ");
@@ -109,12 +116,13 @@ public static void main(String[] args) throws IOException {
                     System.out.println("No rides available at the moment ");
                 } else {
                     for (int i = 0; i < availableRides.size(); i++) {
-                        System.out.println((i + 1) + ". " + availableRides.get(i));
+                        System.out.println((i + 1) + ". " + availableRides.get(i).getPreferredDateTime() + " | Seats: " + availableRides.get(i).getAvailableSeats() + " | Price: " + availableRides.get(i).getPricePerSeat() + " | Car: " + availableRides.get(i).getCarType());
                     }
                     System.out.println("\nEnter ride number to select, or 0 to go back ");
                     int selection = scanner.nextInt();
+                    scanner.nextLine();
                     if (selection > 0 && selection <= availableRides.size()) {
-                        System.out.println("Your choice is " + availableRides.get(selection - 1));
+                        System.out.println("Your selected  " + availableRides.get(selection - 1));
                     }
                 }
                 break;

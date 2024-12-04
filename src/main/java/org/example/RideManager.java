@@ -26,11 +26,10 @@ public class RideManager {
     private void loadRidesFromFile() throws IOException {
         File file = new File(RIDES_FILE);
         if (!file.exists()) {
-            System.out.println("Rides file not found, starting with an empty list.");
+            System.out.println("Rides file not found. ");
             return;
         }
-        try
-                (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
@@ -66,25 +65,28 @@ public class RideManager {
                             ride.getAvailableSeats(),
                             ride.getPricePerSeat(),
                             ride.getCarType()));
-                    //writer.newLine();
-                    OfferRide newRide = new OfferRide(ride.getPreferredDateTime(), ride.getAvailableSeats(), ride.getPricePerSeat(),ride.getCarType());
-                    saveRidesToFile();
-                    System.out.println("User registered succesfully. ");
                 }
             }
         } catch (IOException e) {
             System.out.println("Error saving rides: " + e.getMessage());
         }
     }
+                  //  OfferRide newRide = new OfferRide(ride.getPreferredDateTime(), ride.getAvailableSeats(), ride.getPricePerSeat(),ride.getCarType());
+              //      saveRidesToFile();
+                //    System.out.println("User registered succesfully. ");
 
     public void offerRide(String username, OfferRide ride) {
         availableRides.add(ride);
-        if (!userRides.containsKey(username)) {
-            userRides.put(username, new ArrayList<>());
-        }
-        userRides.get(username).add(ride);
+        userRides.computeIfAbsent(username, k -> new ArrayList<>()).add(ride);
         saveRidesToFile();
     }
+       // availableRides.add(ride);
+        //if (!userRides.containsKey(username)) {
+         //   userRides.put(username, new ArrayList<>());
+        ///}
+       // userRides.get(username).add(ride);
+       // saveRidesToFile();
+
     public List<OfferRide> getAvailableRides() {
         return new ArrayList<>(availableRides);
     }
