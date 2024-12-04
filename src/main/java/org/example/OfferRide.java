@@ -14,6 +14,38 @@ public class OfferRide {
         this.carType = carType;
     }
 
+    public String getPreferredDateTime() {
+        return preferredDateTime;
+    }
+
+    public void setPreferredDateTime(String preferredDateTime) {
+        this.preferredDateTime = preferredDateTime;
+    }
+
+    public int getAvailableSeats() {
+        return availableSeats;
+    }
+
+    public void setAvailableSeats(int availableSeats) {
+        this.availableSeats = availableSeats;
+    }
+
+    public double getPricePerSeat() {
+        return PricePerSeat;
+    }
+
+    public void setPricePerSeat(double pricePerSeat) {
+        PricePerSeat = pricePerSeat;
+    }
+
+    public String getCarType() {
+        return carType;
+    }
+
+    public void setCarType(String carType) {
+        this.carType = carType;
+    }
+/*
     @Override
     public String toString() {
         return "OfferRide{" +
@@ -22,5 +54,7 @@ public class OfferRide {
                 ", PricePerSeat=" + PricePerSeat +
                 ", carType='" + carType + '\'' +
                 '}';
+                }
+
+ */
     }
-}
