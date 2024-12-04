@@ -1,5 +1,7 @@
 package org.example.Map;
 
+import javax.swing.JFrame;
+import javax.swing.event.MouseInputListener;
 import org.jxmapviewer.JXMapViewer;
 import org.jxmapviewer.OSMTileFactoryInfo;
 import org.jxmapviewer.input.CenterMapListener;
@@ -10,31 +12,30 @@ import org.jxmapviewer.viewer.DefaultTileFactory;
 import org.jxmapviewer.viewer.GeoPosition;
 import org.jxmapviewer.viewer.TileFactoryInfo;
 
-import javax.swing.*;
-import javax.swing.event.MouseInputListener;
+public class WaypointSelector {
+    MyWaypoint waypoint;
 
-public class Map {
-
-    private JXMapViewer mapViewer;
-    private SelectionAdapter selectionAdapter;
+    public WaypointSelector(String title) {
+       createMapViewer(title);
+    }
 
     // Initializes the map viewer
-    public void createMapViewer() {
-        mapViewer = new JXMapViewer();
+    private void createMapViewer(String title) {
+        JXMapViewer mapViewer = new JXMapViewer();
+
+        // Create a TileFactoryInfo for OpenStreetMap
         TileFactoryInfo info = new OSMTileFactoryInfo();
         DefaultTileFactory tileFactory = new DefaultTileFactory(info);
         mapViewer.setTileFactory(tileFactory);
-        tileFactory.setThreadPoolSize(8);  // Use 8 threads to load tiles
-    }
 
-    // Configures the map viewer
-    public void configureMapViewer() {
-        mapViewer.setZoom(7);  // Set zoom level
-        mapViewer.setAddressLocation(new GeoPosition(21.5, 39.2));  // Set focus to  Jeddah
-    }
+        // Use 8 threads in parallel to load the tiles
+        tileFactory.setThreadPoolSize(8);
 
-    // Adds mouse and key listeners to the map
-    public void addInteractions() {
+        // Set the focus
+        mapViewer.setZoom(7);
+        mapViewer.setAddressLocation(new GeoPosition(21.5, 39.2));
+
+        // Add interactions
         MouseInputListener mia = new PanMouseInputListener(mapViewer);
         mapViewer.addMouseListener(mia);
         mapViewer.addMouseMotionListener(mia);
@@ -42,31 +43,33 @@ public class Map {
         mapViewer.addMouseWheelListener(new ZoomMouseWheelListenerCursor(mapViewer));
         mapViewer.addKeyListener(new PanKeyListener(mapViewer));
 
-        // Add selection listener
-        selectionAdapter = new SelectionAdapter(mapViewer);
+        // Add a selection
+        SelectionAdapter selectionAdapter = new SelectionAdapter(mapViewer);
         mapViewer.addMouseListener(selectionAdapter);
         mapViewer.addMouseMotionListener(selectionAdapter);
-    }
 
-    // Creates the JFrame window and adds the map viewer
-    public JFrame setupWindow(String FrameTitle) {
-        JFrame frame = new JFrame(FrameTitle);
+        // Display the viewer in a JFrame
+        JFrame frame = new JFrame(title);
         frame.getContentPane().add(mapViewer);
         frame.setSize(800, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
-        return frame;
-    }
 
-    // Catches the waypoint
-    public MyWaypoint runWaypointCatcher() {
-        while (true) {
-            MyWaypoint waypoint = selectionAdapter.getWaypoint();
-            if (waypoint != null) {
-                System.out.println(waypoint);
-                return waypoint;
+        //Waypoint Catcher
+        while (true){
+            waypoint=selectionAdapter.getWaypoint();
+            if (waypoint!=null){
+                selectionAdapter.WaypointCler();
+                break;
             }
         }
+        frame.dispose();
     }
+
+    public MyWaypoint getWaypoint(String Label) {
+        waypoint.setLabel(Label);
+        return waypoint;
+    }
+
 }
 

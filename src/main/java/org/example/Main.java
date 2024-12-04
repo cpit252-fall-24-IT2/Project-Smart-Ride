@@ -1,7 +1,7 @@
 package org.example;
 
 import java.util.Scanner;
-import org.example.Map.Map;
+import org.example.Map.WaypointSelector;
 import org.example.Map.MyWaypoint;
 import javax.swing.*;
 
@@ -61,29 +61,26 @@ public static void main(String[] args){
             
             case 4: {
                 // Request a ride
-                    System.out.println("Request a Ride:");
-                        Map map = new Map();
-                        map.createMapViewer();
-                        map.configureMapViewer();
-                        map.addInteractions();
+                System.out.println("Request a Ride:");
+                WaypointSelector selector = new WaypointSelector("Enter Pick-up Location: ");
 
-                        JFrame frem = map.setupWindow("Enter pickup location: ");
-                        MyWaypoint requestPickupLocation = map.runWaypointCatcher();
-                        System.out.println(requestPickupLocation);
-                        frem.dispose(); // Close the frame
+                MyWaypoint requestPickupLocation = selector.getWaypoint("Star");
+                System.out.println(requestPickupLocation);
 
-                        frem = map.setupWindow("Enter drop-off location: ");
-                        MyWaypoint requestDropOffLocation = map.runWaypointCatcher();
-                        frem.dispose(); // Close the frame
+                selector = new WaypointSelector("Enter drop-off location: ");
 
-                        System.out.print("Enter number of seats needed: ");
-                        int requestedSeats = scanner.nextInt();
-                        scanner.nextLine(); // Consume newline
-                        System.out.print("Enter preferred time: ");
-                        String requestPreferredDateTime = scanner.nextLine();
+                MyWaypoint requestDropOffLocation = selector.getWaypoint("End");
+                System.out.println(requestDropOffLocation);
 
-                        // Log the ride request details
-                        System.out.println("Ride requested from " + requestPickupLocation + " to " + requestDropOffLocation +
+
+                    System.out.print("Enter number of seats needed: ");
+                    int requestedSeats = scanner.nextInt();
+                    scanner.nextLine(); // Consume newline
+                    System.out.print("Enter preferred time: ");
+                    String requestPreferredDateTime = scanner.nextLine();
+
+                    // Log the ride request details
+                System.out.println("Ride requested from " + requestPickupLocation + " to " + requestDropOffLocation +
                                 " for " + requestedSeats + " seat(s) on " + requestPreferredDateTime);
                 break;
             }

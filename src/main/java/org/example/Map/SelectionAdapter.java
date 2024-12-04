@@ -52,28 +52,26 @@ public class SelectionAdapter extends MouseAdapter {
         waypoint = new MyWaypoint("Waypoint", Color.RED, geoPos);
 
         dragging = false;
-
-        // Repaint after finishing the dragging
         viewer.repaint();
     }
 
-    // Get the waypoint created by the user on mouse release
     public MyWaypoint getWaypoint() {
-        MyWaypoint tempWaypoint = waypoint;
-        waypoint = null; // Reset the waypoint after returning it
-        return tempWaypoint;
+        return waypoint;
     }
 
-    public void paint(Graphics g) {
+    public void WaypointCler(){
+        waypoint=null;
+    }
+
+    public Rectangle getRectangle() {
         if (dragging) {
+            int x1 = (int) Math.min(startPos.getX(), endPos.getX());
+            int y1 = (int) Math.min(startPos.getY(), endPos.getY());
+            int x2 = (int) Math.max(startPos.getX(), endPos.getX());
+            int y2 = (int) Math.max(startPos.getY(), endPos.getY());
 
-            g.setColor(Color.RED);
-            int x = (int) Math.min(startPos.getX(), endPos.getX());
-            int y = (int) Math.min(startPos.getY(), endPos.getY());
-            int width = (int) Math.abs(startPos.getX() - endPos.getX());
-            int height = (int) Math.abs(startPos.getY() - endPos.getY());
-
-            g.drawRect(x, y, width, height);  // Example of a rectangle for visual feedback
+            return new Rectangle(x1, y1, x2-x1, y2-y1);
         }
+        return null;
     }
 }

@@ -5,8 +5,8 @@ import org.jxmapviewer.viewer.DefaultWaypoint;
 import org.jxmapviewer.viewer.GeoPosition;
 
 public class MyWaypoint extends DefaultWaypoint {
-    private final String label;
-    private final Color color;
+    private String label;
+    private Color color;
 
     public MyWaypoint(String label, Color color, GeoPosition coord) {
         super(coord);
@@ -18,8 +18,16 @@ public class MyWaypoint extends DefaultWaypoint {
         return label;
     }
 
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
     public Color getColor() {
         return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
     }
 
     @Override
