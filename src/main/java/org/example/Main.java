@@ -1,12 +1,14 @@
 package org.example;
 
+import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 import org.example.Map.Map;
 import org.example.Map.MyWaypoint;
 import javax.swing.*;
 
 public class Main {
-public static void main(String[] args){
+public static void main(String[] args) throws IOException {
     Scanner scanner = new Scanner(System.in);
     UserRegistry registry = UserRegistry.getInstance();
 
@@ -33,11 +35,9 @@ public static void main(String[] args){
                 String username = scanner.nextLine();
                 System.out.println("Enter a phone number");
                 String phone_number = scanner.nextLine();
-                System.out.println("Enter an email");
-                String email = scanner.nextLine();
-                System.out.println("Enter a password");
+                System.out.println("Enter a password: it should be atleast 5 characters, and include atleast 1 Upper Letter, 1 Lower Letter, 1 Digit and 1 special character:: ");
                 String password = scanner.nextLine();
-                User user = new User(username, phone_number, email, password);
+                User user = new User(username, phone_number, password);
                 registry.registerUser(user);
                 break;
             }
@@ -52,7 +52,7 @@ public static void main(String[] args){
                 String username = scanner.nextLine();
                 User user = registry.findUserByUsername(username);
                 if (user != null) {
-                    System.out.println("User found: " + user.getUsername() + ", Email: " + user.getEmail());
+                    System.out.println("User found: " + user.getUsername() );
                 } else {
                     System.out.println("User not found.");
                 }
@@ -103,12 +103,27 @@ public static void main(String[] args){
 
                     // Create an OfferRide object for the driver
                     OfferRide offerRide = new OfferRide(preferredDateTime, availableSeats, price, carType);
-
-                    // Log the offered ride details
                     System.out.println("Ride offered: " + offerRide + ", Type of car: " + carType);
                     break;
+            case 6:{
+                System.out.println("\nAvailable Rides: ");
+                List<OfferRide> availableRides = RideManager.getInstance().getAvailableRides();
+                if (availableRides.isEmpty()){
+                    System.out.println("No rides available at the moment ");
+                } else {
+                    for (int i = 0; i < availableRides.size(); i++) {
+                        System.out.println((i + 1) + ". " + availableRides.get(i));
+                    }
+                    System.out.println("\nEnter ride number to select, or 0 to go back ");
+                    int selection = scanner.nextInt();
+                    if (selection > 0 && selection <= availableRides.size()) {
+                        System.out.println("Your choice is " + availableRides.get(selection - 1));
+                    }
+                }
+                break;
+            }
 
-                case 6:
+                case 7:
                     // Quit
                     System.out.println("Thank you for using the Ride Sharing System. Goodbye!");
                     exit = true;

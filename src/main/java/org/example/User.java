@@ -6,17 +6,15 @@ import java.io.Serializable;
 public class User implements Serializable {
     private String username;
     private String phone_number;
-    private String email;
     private String password ;
     private double balance;
 
 
 
     //constructor
-    public User(String username, String phone_number, String email, String password) {
+    public User(String username, String phone_number, String password) {
         this.username = username;
         this.phone_number = phone_number;
-        this.email = email;
         this.password = password;
         this.balance = 0.0;
     }
@@ -39,13 +37,7 @@ public class User implements Serializable {
         this.phone_number = phone_number;
     }
 
-    public String getEmail() {
-        return email;
-    }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
     public String getPassword() {
         return password;
