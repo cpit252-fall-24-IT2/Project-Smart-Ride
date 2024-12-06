@@ -1,17 +1,40 @@
 package org.example;
+//import javax.persistence.Entity;
+//import javax.persistence.GeneratedValue;
+//import javax.persistence.GenerationType;
+//import javax.persistence.Id;
 
+//@Entity
 public class OfferRide {
+  //  @Id
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+   // private Long id; // Add an ID field
+
     private String preferredDateTime;
     private int availableSeats;
-    private double PricePerSeat;
+    private double pricePerSeat;
     private String carType;
+
+    // Constructors, getters and setters
+
+
+    public OfferRide(Long id, String preferredDateTime, int availableSeats, double pricePerSeat, String carType) {
+      //  this.id = id;
+        this.preferredDateTime = preferredDateTime;
+        this.availableSeats = availableSeats;
+        this.pricePerSeat = pricePerSeat;
+        this.carType = carType;
+    }
 
     //constructor
     public OfferRide(String preferredDateTime, int availableSeats, double pricePerSeat, String carType) {
         this.preferredDateTime = preferredDateTime;
         this.availableSeats = availableSeats;
-        PricePerSeat = pricePerSeat;
+        this.pricePerSeat = pricePerSeat;
         this.carType = carType;
+    }
+
+    public OfferRide(String preferredDateTime) {
     }
 
     public String getPreferredDateTime() {
@@ -31,11 +54,12 @@ public class OfferRide {
     }
 
     public double getPricePerSeat() {
-        return PricePerSeat;
+        return pricePerSeat;
     }
 
     public void setPricePerSeat(double pricePerSeat) {
-        PricePerSeat = pricePerSeat;
+
+        pricePerSeat = pricePerSeat;
     }
 
     public String getCarType() {
@@ -46,15 +70,7 @@ public class OfferRide {
         this.carType = carType;
     }
 /*
-    @Override
-    public String toString() {
-        return "OfferRide{" +
-                ", preferredDateTime='" + preferredDateTime + '\'' +
-                ", availableSeats=" + availableSeats +
-                ", PricePerSeat=" + PricePerSeat +
-                ", carType='" + carType + '\'' +
-                '}';
-                }
+
 
  */
     }

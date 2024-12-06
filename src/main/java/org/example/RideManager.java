@@ -1,17 +1,25 @@
 package org.example;
 
 import java.io.*;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import com.google.*;
+import com.google.gson.Gson;
+
+import java.net.HttpURLConnection;
+
+
 
 public class RideManager {
     private static final String RIDES_FILE = "rides.txt";
     private static RideManager instance;
     private final List<OfferRide> availableRides = new ArrayList<>();
     private final Map<String, List<OfferRide>> userRides = new HashMap<>();
-
+    //server
+    private static final String SERVER_URL = "api";
     private RideManager() throws IOException {
         loadRidesFromFile();
     }
@@ -39,7 +47,7 @@ public class RideManager {
                     int seats = Integer.parseInt(parts[2]);
                     double price = Double.parseDouble(parts[3]);
                     String carType = parts[4];
-                    OfferRide ride = new OfferRide(dateTime, seats, price, carType);
+                    OfferRide ride = new OfferRide("preferred time:" + dateTime + ",available seats: " + seats +",price per seat" + price + ",car type:" + carType);
                     availableRides.add(ride);
                     userRides.computeIfAbsent(username, k -> new ArrayList<>()).add(ride);
                 }
@@ -79,8 +87,51 @@ public class RideManager {
         availableRides.add(ride);
         userRides.computeIfAbsent(username, k -> new ArrayList<>()).add(ride);
         saveRidesToFile();
+        postRideToServer(username, ride);
     }
-       // availableRides.add(ride);
+
+    private void postRideToServer(String username, OfferRide ride) {
+        Gson gson = new Gson();
+        try {
+            URL url = new URL(SERVER_URL);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type", "application/json");
+            conn.setDoOutput(true);
+
+            // Create JSON representation of the ride
+            String jsonInputString =  gson.toJson(new RideRequest(username, ride));
+
+            try (OutputStream os = conn.getOutputStream()) {
+                byte[] input = jsonInputString.getBytes("utf-8");
+                os.write(input, 0, input.length);
+            }
+            // Check the response code
+            int responseCode = conn.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                System.out.println("Ride posted successfully to the server.");
+            } else if (responseCode == HttpURLConnection.HTTP_BAD_REQUEST) {
+                System.out.println("Bad request: Please check the ride details.");
+            } else {
+                System.out.println("Failed to post ride: " + conn.getResponseMessage());
+            }
+
+        } catch (IOException e) {
+            System.out.println("Error posting ride to server: " + e.getMessage());
+        }
+    }
+    // Class to represent the JSON structure
+    private class RideRequest {
+        String username;
+        OfferRide ride;
+
+        RideRequest(String username, OfferRide ride) {
+            this.username = username;
+            this.ride = ride;
+        }
+    }
+
+    // availableRides.add(ride);
         //if (!userRides.containsKey(username)) {
          //   userRides.put(username, new ArrayList<>());
         ///}

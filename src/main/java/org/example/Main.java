@@ -1,5 +1,79 @@
 package org.example;
 
+import org.example.Strategy.*;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        Scanner scanner = new Scanner(System.in);
+        UserRegistry registry = UserRegistry.getInstance();
+        RideManager rideManager = RideManager.getInstance();
+        UserChoice selection = new UserChoice();
+
+        System.out.println("\nWelcome to Ride Sharing APP\nWhat would you like to do?");
+        boolean exit = false;
+
+        while (!exit) {
+            displayMenu();
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+
+            if (choice == 7) {
+                System.out.println("Thank you for using the Ride Sharing System. Goodbye!");
+                exit = true;
+            } else {
+                switch (choice) {
+                    case 1:
+                        selection.setStrategy(new RegisterStrategy(registry));
+                        break;
+                    case 2:
+                        selection.setStrategy(new DisplayUsersStrategy(registry));
+                        break;
+                    case 3:
+                        selection.setStrategy(new SearchUserStrategy(registry));
+                        break;
+                    case 4:
+                        selection.setStrategy(new RequestRideStrategy(rideManager));
+                        break;
+                    case 5:
+                        selection.setStrategy(new OfferRideStrategy(rideManager));
+                        break;
+                    case 6:
+                        selection.setStrategy(new DisplayRidesStrategy(rideManager));
+                        break;
+                    default:
+                        System.out.println("Invalid choice. Please select a number between 1 and 7.");
+                        continue;
+                }
+                selection.executeStrategy(scanner);
+            }
+        }
+
+        scanner.close();
+    }
+
+    private static void displayMenu() {
+        System.out.println("\n1. Register/Log In");
+        System.out.println("2. Display All Users");
+        System.out.println("3. Search User by Username");
+        System.out.println("4. Request a Ride");
+        System.out.println("5. Offer a Ride");
+        System.out.println("6. Display available Rides");
+        System.out.println("7. Quit");
+        System.out.print("Enter your choice (1-7): ");
+    }
+}
+
+
+
+
+
+
+
+
+
+/*
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
@@ -101,10 +175,11 @@ public static void main(String[] args) throws IOException {
                        System.out.print("Enter type of car: ");
                        String carType = scanner.nextLine();
 
-                       // Create an OfferRide object for the driver
+                       //
                        OfferRide offerRide = new OfferRide(preferredDateTime, availableSeats, price, carType);
                        rideManager.offerRide(offererUsername, offerRide);
                        System.out.println("Ride offered successfully " + offerRide);
+                       scanner.nextLine();
                    } catch (Exception e) {
                        System.out.println("Error offering Ride: " + e.getMessage());
                    }
@@ -142,5 +217,5 @@ public static void main(String[] args) throws IOException {
         scanner.close();
     }
 }
-
+*/
 
