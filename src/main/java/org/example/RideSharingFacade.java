@@ -1,17 +1,10 @@
 package org.example;
 
-
 /*
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-
-
-
-/*
-
-
 
 public class RideSharingFacade {
     private RideSharingSystem rideSharingSystem;
@@ -52,8 +45,6 @@ public class RideSharingFacade {
         }
         return;
     }
-
-
-    }
+}
 
 */
