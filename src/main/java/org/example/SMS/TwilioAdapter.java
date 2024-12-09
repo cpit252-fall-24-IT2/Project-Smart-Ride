@@ -11,7 +11,7 @@ public class TwilioAdapter implements SMSHander{
     }
 
     @Override
-    public boolean sendVerifyCode(String Phone, String Code) {
+    public boolean sendMessage(String phone, String message) {
         return false;
     }
 }
