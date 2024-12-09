@@ -1,6 +1,6 @@
 package org.example.SMS;
 
-import com.twilio.*;
+import com.twilio.Twilio;
 
 public class TwilioAdapter implements SMSHander{
 
@@ -8,6 +8,7 @@ public class TwilioAdapter implements SMSHander{
     public static final String AUTH_TOKEN = "";
 
     public TwilioAdapter() {
+        Twilio.init(ACCOUNT_SID,AUTH_TOKEN);
     }
 
     @Override
