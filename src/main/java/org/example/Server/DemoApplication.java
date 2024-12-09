@@ -1,12 +1,17 @@
 package org.example.Server;
 
+import org.example.Map.MyWaypoint;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 
 public class DemoApplication {
 
     public static void main(String[] args) {
         final int port = 12345;
+        ArrayList<MyWaypoint> list =new ArrayList<>();
 
         try (ServerSocket serverSocket = new ServerSocket(port)) {
             System.out.println("Server started. Listening on port " + port);
@@ -31,8 +36,15 @@ public class DemoApplication {
 
         @Override
         public void run() {
+            try (ObjectInputStream ois = new ObjectInputStream(clientSocket.getInputStream());
+                 ObjectOutputStream oos = new ObjectOutputStream(clientSocket.getOutputStream());) {
 
+
+
+
+        }catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
-
 }
