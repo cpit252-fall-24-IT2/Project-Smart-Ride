@@ -22,8 +22,8 @@ The application uses Singleton for user registration and Strategy design pattern
 
 ###  API used
 - we used jxmapviewer2 for the map in the app
--we used twilio for the SMS handling 
+- we used twilio for the SMS handling 
 
 ## Contributors
-Mohammed Serajuldeen
-Umar Musa Jega
+- Mohammed Serajuldeen
+- Umar Musa Jega
